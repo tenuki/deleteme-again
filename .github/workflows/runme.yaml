@@ -8,7 +8,29 @@ on:
 jobs:
   bash-example:
     runs-on: ubuntu-latest
+    env:
+      MY_NAME: "Mona The Octocat"
+      R_GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      R_GH_REPO: ${{ github.repository }}
+      R_NUMBER: ${{ github.event.issue.number }}
     steps:
+      - name: bash-version
+        run: echo "::add-mask::$MY_NAME"
+
+      - name: bash-version-test2
+        run: echo "$NUMBER" body "$BODY"  otro "$GH_TOKEN"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.issue.number }}
+          BODY: >
+            This issue is available for anyone to work on.
+            **Make sure to reference this issue in your pull request.**
+            :sparkles: Thank you for your contribution! :sparkles:
+
+      - name: bash-version-test3
+        run: echo "$R_NUMBER" body otro "$R_GH_TOKEN"
+
       - name: Group of log lines
         env:
           ISSUE_URL: ${{ github.event.issue.html_url }}
