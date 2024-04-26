@@ -13,7 +13,7 @@ jobs:
       R_GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       R_GH_REPO: ${{ github.repository }}
       R_NUMBER: ${{ github.event.issue.number }}
-      R_EVENT: ${{ github.event }}
+      # R_EVENT: ${{ github.event }}
     steps:
       - name: bash-version
         run: echo "::add-mask::$MY_NAME"
@@ -33,7 +33,12 @@ jobs:
         run: echo "$R_NUMBER" / $R_GH_REPO body otro "$R_GH_TOKEN"
 
       - name: bash-version-test4
-        run: echo "$R_EVENT"
+        run: |
+          MACHINE_ARC_MAP=$(cat <<END
+            ${{ github.event }}
+          END
+          )
+          echo $MACHINE_ARC_MAP
 
       - name: fetch
         run: |
