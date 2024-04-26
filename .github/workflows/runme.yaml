@@ -73,7 +73,7 @@ jobs:
                 echo $ISSUES
                 echo EOF
               } >> "$GITHUB_ENV"
-      - uses: mshick/add-pr-comment@v2
+      - uses: mshick/add-pr-comment@v2.8.2
         with:
           message: |
             **Hello**
