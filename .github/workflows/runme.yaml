@@ -18,3 +18,19 @@ jobs:
             echo "Inside group:", $ISSUE_URL
             echo "other:", $OTHER
             echo "::endgroup::"
+      - name: prepare env
+        env:
+          TEMPDATA: "$issues"
+        run: |
+              {
+                echo 'ISSUES<<EOF'
+                echo $TEMPDATA
+                echo EOF
+              } >> "$GITHUB_ENV"
+      - name: show
+        run: |
+      {
+        echo 'ISSUES<<EOF'
+        echo $ISSUES
+        echo EOF
+      } >> "$GITHUB_ENV"
