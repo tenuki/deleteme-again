@@ -1,0 +1,83 @@
+on:
+  pull_request:
+    branches:
+      - main
+      - 'releases/**'
+      - '**/**'
+
+jobs:
+  bash-example:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    env:
+      MY_NAME: "Mona The Octocat"
+      R_GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      R_GH_REPO: ${{ github.repository }}
+      R_NUMBER: ${{ github.event.issue.number }}
+      # R_EVENT: ${{ github.event }}
+    steps:
+      - name: bash-version
+        run: echo "::add-mask::$MY_NAME"
+
+      - name: bash-version-test2
+        run: echo "$NUMBER" body "$BODY"  otro "$GH_TOKEN"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.issue.number }}
+          BODY: >
+            This ( $GH_REPO )issue is available for anyone to work on.
+            **Make sure to reference this issue in your pull request.**
+            :sparkles: Thank you for your contribution! :sparkles:
+
+      - name: bash-version-test3
+        run: echo "$R_NUMBER" / $R_GH_REPO body otro "$R_GH_TOKEN"
+
+      - name: bash-version-test4
+        run: |
+          MACHINE_ARC_MAP=$(cat <<END
+            ${{ github.event }}
+          END
+          )
+          echo $MACHINE_ARC_MAP
+
+      - name: fetch
+        run: |
+          curl -L \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer $R_GH_TOKEN" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/tenuki/$R_GH_REPO/commits
+
+      - name: Group of log lines
+        env:
+          ISSUE_URL: ${{ github.event.issue.html_url }}
+          OTHER: ${{ github.event.issue }}
+        run: |
+            echo "::group::My title"
+            echo "Inside group:", $ISSUE_URL
+            echo "other:", $OTHER
+            echo "::endgroup::"
+      - name: prepare env
+        env:
+          TEMPDATA: "$issues"
+        run: |
+              {
+                echo 'ISSUES<<EOF'
+                echo $TEMPDATA
+                echo EOF
+              } >> "$GITHUB_ENV"
+      - name: show
+        run: |
+              {
+                echo 'ISSUES<<EOF'
+                echo $ISSUES
+                echo EOF
+              } >> "$GITHUB_ENV"
+      - uses: mshick/add-pr-comment@v2.8.2
+        with:
+          message: |
+            **Hello**
+            🌏
+            !
