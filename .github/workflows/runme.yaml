@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Group of log lines
-      - env:
+        env:
           ISSUE_URL: ${{ github.event.issue.html_url }}
           OTHER: ${{ github.event.issue }}
         run: |
