@@ -24,12 +24,12 @@ jobs:
           GH_REPO: ${{ github.repository }}
           NUMBER: ${{ github.event.issue.number }}
           BODY: >
-            This issue is available for anyone to work on.
+            This ( $GH_REPO )issue is available for anyone to work on.
             **Make sure to reference this issue in your pull request.**
             :sparkles: Thank you for your contribution! :sparkles:
 
       - name: bash-version-test3
-        run: echo "$R_NUMBER" body otro "$R_GH_TOKEN"
+        run: echo "$R_NUMBER" / $R_GH_REPO body otro "$R_GH_TOKEN"
 
       - name: Group of log lines
         env:
