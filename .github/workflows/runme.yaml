@@ -8,6 +8,8 @@ on:
 jobs:
   bash-example:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     env:
       MY_NAME: "Mona The Octocat"
       R_GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
