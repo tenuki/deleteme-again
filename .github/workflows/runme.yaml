@@ -29,8 +29,8 @@ jobs:
               } >> "$GITHUB_ENV"
       - name: show
         run: |
-      {
-        echo 'ISSUES<<EOF'
-        echo $ISSUES
-        echo EOF
-      } >> "$GITHUB_ENV"
+              {
+                echo 'ISSUES<<EOF'
+                echo $ISSUES
+                echo EOF
+              } >> "$GITHUB_ENV"
