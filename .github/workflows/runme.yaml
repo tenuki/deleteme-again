@@ -1,0 +1,20 @@
+on:
+  pull_request:
+    branches:
+      - main
+      - 'releases/**'
+      - '**/**'
+
+jobs:
+  bash-example:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Group of log lines
+      - env:
+          ISSUE_URL: ${{ github.event.issue.html_url }}
+          OTHER: ${{ github.event.issue }}
+        run: |
+            echo "::group::My title"
+            echo "Inside group:", $ISSUE_URL
+            echo "other:", $OTHER
+            echo "::endgroup::"
